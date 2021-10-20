@@ -1,0 +1,522 @@
+<!doctype html>
+
+<html lang="en">
+
+  <head>
+
+    <!-- Required meta tags -->
+
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+    <!-- Bootstrap CSS -->
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+
+    <title>Fill your Details</title>
+
+        <style>
+
+        h2 {
+
+            color: white;
+
+            font-family: 'Poppins', 'sans-serif';
+
+        }
+
+
+        p,
+
+        label,
+
+        legend {
+
+            color: white;
+
+            font-family: 'Poppins', sans-serif;
+
+        }
+
+
+        body {
+
+            background-color: #23272A;
+
+            font-family: 'Poppins', sans-serif;
+
+        }
+
+
+        fieldset {
+
+            width: 250px;
+
+            padding-inline-start: 50px;
+
+            padding-inline-end: 50px;
+
+            margin: 15px;
+
+            padding-top: 5px;
+
+            padding-bottom: 10px;
+
+        }
+
+
+        input {
+
+            background-color: #363e44;
+
+            border: 0px;
+
+            border-radius: 15px;
+
+            color: white;
+
+            font-family: 'Poppins', 'sans-serif';
+
+            padding: 5px;
+
+        }
+
+
+        button {
+
+            background-color: white;
+
+            border: 0px;
+
+            border-radius: 0px;
+
+            color: white;
+
+            font-family: 'Poppins', 'sans-serif';
+
+            padding: 10px;
+
+            margin: 10px;
+
+        }
+
+
+        /* button :hover {
+
+            background-color: #25a1ff;
+
+            border: 0px;
+
+            border-radius: 0px;
+
+            color: white;
+
+            font-family: 'Poppins', 'sans-serif';
+
+            padding: 10px;
+
+            margin: 10px;
+
+        } */
+
+
+        .sidebar {
+
+            height: 100%;
+
+            width: 97px;
+
+            position: fixed;
+
+            z-index: 1;
+
+            top: 0;
+
+            left: 0;
+
+            background-color: #111;
+
+            overflow-x: hidden;
+
+            padding-top: 16px;
+
+        }
+
+
+        .sidebar p {
+
+            padding: 10px 8px 5px 16px;
+
+            text-decoration: none;
+
+            font-size: 19px;
+
+            color: #363e44;
+
+            display: block;
+
+        }
+
+
+        .sidebar p:hover {
+
+            color: white;
+
+        }
+
+
+        .bg {
+
+            background-color: #111;
+
+            padding: 5px;
+
+            margin: 0px;
+
+        }
+
+       td{
+
+           color:white;
+
+       }
+
+    </style>
+
+
+
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+    <a class="navbar-brand" href="#" style="color: #363e44;">Encrypt and Decrypt</a>
+
+        <a class="navbar-brand" href="#">Encrypt and Decrypt</a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+
+            <span class="navbar-toggler-icon"></span>
+
+        </button>
+
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+            <ul class="navbar-nav mr-auto">
+
+                <li class="nav-item active">
+
+                    <a class="nav-link" href="/endec/registration.php">Home <span class="sr-only">(current)</span></a>
+
+                </li>
+
+                <li class="nav-item">
+
+                    <a class="nav-link" href="#">Link</a>
+
+                </li>
+
+                <li class="nav-item dropdown">
+
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                        Dropdown
+
+                    </a>
+
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                        <a class="dropdown-item" href="#">Action</a>
+
+                        <a class="dropdown-item" href="#">Another action</a>
+
+                        <div class="dropdown-divider"></div>
+
+                        <a class="dropdown-item" href="#">Something else here</a>
+
+                    </div>
+
+                </li>
+
+                <li class="nav-item">
+
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+
+                </li>
+
+            </ul>
+
+            <form class="form-inline my-2 my-lg-0">
+
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+
+            </form>
+
+        </div>
+
+
+    </nav>
+
+
+ <!-- The sidebar -->
+
+ <div class="sidebar">
+
+        <p>Dhesik Vinayak</p>
+
+        <p>Kartik Kumar</p>
+
+        <p>Pranav Prakasan</p>
+
+        <p>Tanvi Saxena</p>
+
+
+</div>
+
+
+
+
+
+<?php
+
+$key = 'qkwjdiw239&&jdafweihbrhnan&^%$ggdnawhd4njshjwuuO';
+
+
+
+function encryptthis($data, $key) {
+
+        $encryption_key = base64_decode($key);
+
+        $iv = openssl_random_pseudo_bytes(openssl_cipher_iv_length('aes-256-cbc'));
+
+        $encrypted = openssl_encrypt($data, 'aes-256-cbc', $encryption_key, 0, $iv);
+
+        return base64_encode($encrypted . '::' . $iv);
+
+        }
+
+         
+
+        function decryptthis($data, $key) {
+
+        $encryption_key = base64_decode($key);
+
+        list($encrypted_data, $iv) = array_pad(explode('::', base64_decode($data), 2),2,null);
+
+        return openssl_decrypt($encrypted_data, 'aes-256-cbc', $encryption_key, 0, $iv);
+
+        }
+
+        
+
+
+
+if($_SERVER['REQUEST_METHOD'] == 'POST'){
+
+        $First_name=$_POST['First_name'];
+
+        $Last_name=$_POST['Last_name'];
+
+        $Email=$_POST['Email'];
+
+        
+
+
+        // Connecting to the Database
+
+        $servername = "localhost";
+
+        $username = "root";
+
+        $password = "";
+
+        $database = "encrypt-decrypt";
+
+
+        // Create a connection
+
+        $conn = mysqli_connect($servername, $username, $password, $database);
+
+        // Die if connection was not successful
+
+        if (!$conn){
+
+                die("Sorry we failed to connect: ". mysqli_connect_error());
+
+        }
+
+        else{
+
+          // Submit these to a database
+
+          // Sql query to be executed
+
+          echo("Connected to the database sucessfully!");
+
+          $Email = encryptthis($Email,$key);
+
+          //$Email = decryptthis($Email,$key);
+
+
+          $sql = "INSERT INTO `details` (`First_name`, `Last_name`, `Email`) VALUES ('$First_name', '$Last_name', '$Email')";
+
+          $result = mysqli_query($conn, $sql);
+
+
+          if($result){
+
+                echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+
+                <strong>Success!</strong> Your entry has been submitted successfully!
+
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+
+                  <span aria-hidden="true">×</span>
+
+                </button>
+
+          </div>';
+
+          }
+
+         else{
+
+                echo "The record was not inserted successfully because of this error ---> ". mysqli_error($conn);
+
+                echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+
+                <strong>Error!</strong>        Re Record updated!
+
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+
+                  <span aria-hidden="true">×</span>
+
+                </button>
+
+          </div>';
+
+          }
+
+        }
+
+}
+
+?>
+
+<center>
+
+<legend>Fill in your Details below</legend>
+
+<form action ="/endec/registration.php" method="post" >
+
+<fieldset>         
+
+                <label for="First_name">First_name</label><br>
+
+                <input type="text" name="First_name" required /><br><br>
+
+
+                <label for="lname">Last Name</label><br>
+
+                <input type="text" name="Last_name" required /><br><br>
+
+
+                <label for="email">Email</label><br>
+
+                <input type="text" name="Email" required /><br><br>
+
+
+                <input type="submit" name="submit" />
+
+                <br>
+
+
+            </fieldset>
+
+
+            <br>
+
+            <br>
+
+
+            <label style="font-size: 24px;">Operations</label><br>
+
+        <button type="submit" name="add" class ="btn btn-default" style="background-color: #363e44; color:white;">Add</button>
+
+        <button type="submit" name="modify" class ="btn btn-default" style="background-color: #363e44; color:white;">Modify</button>
+
+        <button type="submit" name="delete" class ="btn btn-default" style="background-color: #363e44; color:white;">Delete</button>
+
+        <button type="submit" name="Decrypt" class ="btn btn-default" style="background-color: #363e44; color:white;">Decrypt</button>
+
+
+</form>        
+
+
+</center>  
+
+        
+
+<center>
+
+
+<!-- <h2>Details</h2> -->
+
+<label style="font-size: 24px;">Details</label><br>
+
+
+<table border="1" >
+
+    <tr>
+
+        <td>First_name</td>
+
+        <td>Last_name</td>
+        <td>Email</td>
+    </tr>
+
+    <?php
+    if (isset($_POST["insert"])) {
+        mysqli_query($conn, "insert into details values(NULL,'$_POST[First_name]', '$_POST[Last_name]', '$_POST[Email]')");
+    }
+    if (isset($_POST["modify"])) {
+        mysqli_query($conn, "UPDATE `details` SET Last_name = '$_POST[Last_name]' WHERE First_name='$_POST[First_name]'");
+    }
+    if (isset($_POST["delete"])) {
+        mysqli_query($conn, "delete from details where First_name='$_POST[First_name]'");
+    }
+    // View code here
+
+    if (isset($_POST["Decrypt"])) {
+        $records = mysqli_query($conn, "select * from details where First_name='$_POST[First_name]'");
+
+        while ($data = mysqli_fetch_array($records)) {
+    ?>
+            <tr>
+                <td><?php echo $data['First_name']; ?></td>
+
+                <td><?php echo $data['Last_name']; ?></td>
+
+                <td><?php echo decryptthis($data['Email'], $key = 'qkwjdiw239&&jdafweihbrhnan&^%$ggdnawhd4njshjwuuO'); ?></td>
+            </tr>
+
+    <?php
+
+        }
+
+    }
+
+    ?>
+
+</table>
+
+</center>
+
+
